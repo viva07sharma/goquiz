@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Options</title>
+</head>
+<body>
+    <h1>Choose Your Options</h1>
+    <form action="/submit-answer" method="POST">
+        <input name="userID" type="hidden" value="{{ .UserID }}" />
+        <h1>Quiz Questions</h1>
+        {{range $key, $value := .Questions}}
+        <div>
+            <h2>{{ $value.Ques }}</h2>
+            <p>Options:</p>
+            <ul>
+                {{range $index, $opt := $value.Opts}}
+                    <li><input type="radio" name="{{ $key }}" value="{{ $index }}" /> {{ $opt }}</li>
+                {{end}}
+            </ul>
+        </div>
+        {{end}}
+        <input type="submit" value="submit" />
+    </form>
+</body>
+</html>
